@@ -125,10 +125,14 @@ $ cat output2
 
 
 Now you can ship your image to lemaitre3
+```
 $ scp ./lolcow.simg lemaitre3
+```
 This might not work from the virtual machine (it does not know your keys).
 you can copy it to your local host file system via
+```
 $ cp ./lolcow.simg /vagrant
+```
 and then retry from your physical os.
 
 Once the image is on lemaitre3, try to run it locally and/or via srun.
