@@ -6,7 +6,6 @@ This is an introductory workshop on Singularity. It was originally taught by Dav
 - [Singularity Home](http://singularity.lbl.gov/)
 - [Singularity on GitHub](https://github.com/singularityware/singularity)
 - [Singularity on Google Groups](https://groups.google.com/a/lbl.gov/forum/#!forum/singularity)
-- [Singularity at the NIH HPC](https://hpc.nih.gov/apps/singularity.html)
 - [Docker documentation](https://docs.docker.com/)
 - [Singularity Hub](https://singularity-hub.org/)
 - [Docker Hub](https://hub.docker.com/)
