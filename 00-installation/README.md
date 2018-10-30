@@ -1,4 +1,13 @@
-# Installing Singularity
+# Installing Singularity on Mac/Windows
+
+Singularity is not compatible with OSX/Windows.
+The advised way to create your image on those OS is to use a linux virtual machine.
+
+One particular practical way is to use the vagrant option: https://www.sylabs.io/guides/2.5/user-guide/installation.html#install-on-mac (for mac)
+and for windows: https://www.sylabs.io/guides/2.5/user-guide/installation.html#install-on-windows
+
+
+# Installing Singularity On Linux
 Here we will install the latest tagged release from [GitHub](https://github.com/singularityware/singularity). If you prefer to install a different version or to install Singularity in a different location, see these [Singularity docs](http://singularity.lbl.gov/docs-installation).
 
 We're going to compile Singularity from source code.  First we'll need to make sure we have some development tools installed so that we can do that.  On Ubuntu, run these commands to make sure you have all the necessary packages installed.
