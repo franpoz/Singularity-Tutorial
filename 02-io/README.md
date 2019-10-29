@@ -5,7 +5,7 @@ Singularity does not try to isolate your container completely from the host syst
 Using the exec command, we can run commands within the container from the host system.  
 
 ```
-$ singularity exec lolcow.simg cowsay 'How did you get out of the container?'
+$ singularity exec lolcow.sif cowsay 'How did you get out of the container?'
  _______________________________________
 < How did you get out of the container? >
  ---------------------------------------
@@ -21,7 +21,7 @@ In this example, singularity entered the container, ran the `cowsay` command, di
 You can also use pipes and redirection to blur the lines between the container and the host system.  
 
 ```
-$ singularity exec lolcow.simg cowsay moo > cowsaid
+$ singularity exec lolcow.sif cowsay moo > cowsaid
 
 $ cat cowsaid
  _____
@@ -65,7 +65,7 @@ if, however, you need to pipe the output of one command in your container to ano
 Pipes and redirects are shell constructs, so if you don't want your host shell to interpret them, you have to hide them from it.
 
 ```
-$ singularity exec lolcow.simg sh -c "fortune | cowsay | lolcat"
+$ singularity exec lolcow.sif sh -c "fortune | cowsay | lolcat"
 ```
 
 The above invokes a new shell, but inside the container, and tells it to run the single command line `fortune | cowsay | lolcat`.
