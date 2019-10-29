@@ -14,7 +14,7 @@ $ echo "The grass is always greener over the septic tank" > input
 Now I'll "analyze" the "data"
 
 ```
-$ cat input | singularity exec lolcow.simg cowsay > output
+$ cat input | singularity exec lolcow.sif cowsay > output
 ```
 
 The "analyzed data" is saved in a file called `output`. 
@@ -37,7 +37,7 @@ This _works..._ but the syntax is ugly and difficult to remember.
 Singularity supports a neat trick for making a container function as though it were an executable.  We need to create a **runscript** inside the container. It turns out that our Singularity recipe file already contains a runscript.  It causes our container to print a helpful message.  
 
 ```
-$ ./lolcow.simg
+$ ./lolcow.sif
 This is what happens when you run the container...
 ```
 
@@ -45,9 +45,8 @@ Let's rewrite this runscript in the definition file and rebuild our container
 so that it does something more useful.  
 
 ```
-BootStrap: debootstrap
-OSVersion: stable
-MirrorURL: http://ftp.us.debian.org/debian/
+Bootstrap: library
+From: library/default/debian
 
 %runscript
     infile=
@@ -97,7 +96,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 Now we must rebuild out container to install the new runscript.  
 
 ```
-$ sudo singularity build --force lolcow.simg Singularity
+$ sudo singularity build --force lolcow.sif Singularity
 ```
 
 Note the `--force` option which ensures our previous container is completely overwritten.
@@ -105,11 +104,11 @@ Note the `--force` option which ensures our previous container is completely ove
 After rebuilding our container, we can call the lolcow.simg as though it were an executable, give it input and output file names, and optionally give additional arguments to go directly to the `cowsay` program.  
 
 ```
-$ ./lolcow.simg
+$ ./lolcow.sif
 Usage:
-lolcow.simg -i <infile> -o <outfile> [ -- <cowsay options> ]
+lolcow.sif -i <infile> -o <outfile> [ -- <cowsay options> ]
 
-$ ./lolcow.simg -i input -o output2
+$ ./lolcow.sif -i input -o output2
 
 $ cat output2
  ______________________________________
@@ -126,12 +125,12 @@ $ cat output2
 
 Now you can ship your image to lemaitre3
 ```
-$ scp ./lolcow.simg lemaitre3
+$ scp ./lolcow.sif lemaitre3
 ```
 This might not work from the virtual machine (it does not know your keys).
 you can copy it to your local host file system via
 ```
-$ cp ./lolcow.simg /vagrant
+$ cp ./lolcow.sif /vagrant
 ```
 and then retry from your physical os.
 
