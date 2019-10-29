@@ -18,9 +18,8 @@ $ nano Singularity
 It should look like this:
 
 ```
-BootStrap: debootstrap
-OSVersion: stable
-MirrorURL: http://ftp.us.debian.org/debian/
+Bootstrap: library
+From: library/default/debian
 
 %runscript
     echo "This is what happens when you run the container..."
@@ -32,7 +31,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
     apt-get clean
 ```
 
-See the [Singularity docs](http://singularity.lbl.gov/docs-recipes) for an explanation of each of these sections.
+See the [Singularity docs](https://sylabs.io/guides/3.3/user-guide/definition_files.html) for an explanation of each of these sections.
 
 Now let's use this recipe file as a starting point to build our `lolcow.img` container. Note that the build command requires `sudo` privileges, when used in combination with a recipe file. 
 
@@ -42,11 +41,11 @@ $ sudo singularity build --sandbox lolcow Singularity
 
 The `--sandbox` option in the command above tells Singularity that we want to build a special type of container for development purposes.  
 
-Singularity can build containers in several different file formats. The default is to build a [squashfs](https://en.wikipedia.org/wiki/SquashFS) image. The squashfs format is compressed and immutable making it a good choice for reproducible, production-grade containers.  
+Singularity can build containers in several different file formats. The default is to build a [SIF]. image. The SIF format is compressed and immutable making it a good choice for reproducible, production-grade containers.  
 
 But if you want to shell into a container and tinker with it (like we will do here), you should build a sandbox (which is really just a directory).  This is great when you are still developing your container and don't yet know what should be included in the recipe file.  
 
-When your build finishes, you will have a basic Ubuntu container saved in a local directory called `lolcow`.
+When your build finishes, you will have a basic Debian container saved in a local directory called `lolcow`.
 
 # Using `shell` to explore and modify containers
 
@@ -192,9 +191,8 @@ $ nano Singularity
 Here is what our updated definition file should look like.
 
 ```
-BootStrap: debootstrap
-OSVersion: stable
-MirrorURL: http://ftp.us.debian.org/debian/
+Bootstrap: library
+From: library/default/debian
 
 %runscript
     echo "This is what happens when you run the container..."
@@ -213,18 +211,18 @@ MirrorURL: http://ftp.us.debian.org/debian/
 Let's rebuild the container with the new definition file.
 
 ```
-$ sudo singularity build lolcow.simg Singularity
+$ sudo singularity build lolcow.sif Singularity
 ```
 
-Note that we changed the name of the container.  By omitting the `--sandbox` option, we are building our container in the standard Singularity squashfs file format.  We are denoting the file format with the (optional) `.simg` extension.  A squashfs file is compressed and immutable making it a good choice for a production environment.
+Note that we changed the name of the container.  By omitting the `--sandbox` option, we are building our container in the standard Singularity squashfs file format.  We are denoting the file format with the (optional) `.sif` extension.  A sif file is compressed and immutable making it a good choice for a production environment.
 
 Singularity stores a lot of [useful metadata](http://singularity.lbl.gov/docs-environment-metadata).  For instance, if you want to see the recipe file that was used to create the container you can use the `inspect` command like so:
 
 ```
 $ singularity inspect --deffile lolcow.simg
-BootStrap: debootstrap
-OSVersion: stable
-MirrorURL: http://ftp.us.debian.org/debian/
+
+Bootstrap: library
+From: library/default/debian
 
 %runscript
     echo "This is what happens when you run the container..."
