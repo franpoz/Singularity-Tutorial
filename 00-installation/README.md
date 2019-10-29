@@ -3,60 +3,18 @@
 Singularity is not compatible with OSX/Windows.
 The advised way to create your image on those OS is to use a linux virtual machine.
 
-One particular practical way is to use the vagrant option: https://www.sylabs.io/guides/2.5/user-guide/installation.html#install-on-mac (for mac)
-and for windows: https://www.sylabs.io/guides/2.5/user-guide/installation.html#install-on-windows
+One particular practical way is to use the vagrant option: 
+https://sylabs.io/guides/3.0/user-guide/installation.html#install-on-windows-or-mac (for mac)
+and for windows: https://sylabs.io/guides/3.0/user-guide/installation.html#install-on-windows-or-mac
 
+Note for Mac, a native client is also possible: https://sylabs.io/singularity-desktop-macos/
+but it is still in beta (and it offers limited possiblity including the impossiblity to build image locally)
 
 # Installing Singularity On Linux
-Here we will install the latest tagged release from [GitHub](https://github.com/singularityware/singularity). If you prefer to install a different version or to install Singularity in a different location, see these [Singularity docs](http://singularity.lbl.gov/docs-installation).
 
-We're going to compile Singularity from source code.  First we'll need to make sure we have some development tools installed so that we can do that.  On Ubuntu, run these commands to make sure you have all the necessary packages installed.
+Follow the following instructions: https://sylabs.io/guides/3.0/user-guide/
 
-```
-$ sudo apt-get update
-
-$ sudo apt-get -y install python build-essential debootstrap squashfs-tools libarchive-dev
-```
-
-On CentOS, these commmands should get you up to speed.
-
-```
-$ sudo yum update 
-
-$ sudo yum groupinstall 'Development Tools'
-
-$ sudo yum install wget epel-release
-
-$ sudo yum install debootstrap.noarch squashfs-tools libarchive-devel
-```
-
-Next we'll download a compressed archive of the source code (using the the `wget` command). Then we'll extract the source code from the archive (with the `tar` command).
-
-```
-$ wget https://github.com/singularityware/singularity/releases/download/2.5.2/singularity-2.5.2.tar.gz
-
-$ tar -xf singularity-2.5.2.tar.gz
-```
-
-Finally it's time to build and install!
-
-```
-$ cd singularity-2.5.2
-
-$ ./configure --prefix=/usr/local
-
-$ make 
-
-$ sudo make install
-```
-
-If you want support for tab completion of Singularity commands, you need to source the appropriate file and add it to the bash completion directory in `/etc` so that it will be sourced automatically when you start another shell.
-
-```
-$ . etc/bash_completion.d/singularity
-
-$ sudo cp etc/bash_completion.d/singularity /etc/bash_completion.d/
-```
+# first check
 
 If everything went according to plan, you now have a working installation of Singularity.
 Simply typing `singularity` will give you a summary of all the commands you can use.
