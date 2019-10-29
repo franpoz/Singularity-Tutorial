@@ -7,12 +7,12 @@ Let's be more explicit. Consider this example.
 ```
 $ singularity shell lolcow.simg
 
-Singularity lolcow.simg:~> echo wutini > ~/jawa.txt
+Singularity lolcow.sif:~> echo wutini > ~/jawa.txt
 
-Singularity lolcow.simg:~> cat ~/jawa.txt
+Singularity lolcow.sif:~> cat ~/jawa.txt
 wutini
 
-Singularity lolcow.simg:~> exit
+Singularity lolcow.sif:~> exit
 
 $ cat ~/jawa.txt
 wutini
@@ -31,7 +31,7 @@ your container by default.  These include:
 
 You can specify other directories to bind using the `--bind` option or the environmental variable `$SINGULARITY_BINDPATH`
 
-Let's say we want to use our `cowsay.img` container to "analyze data" and save results in a different directory.  For this example, we first need to create a new directory with some data on our host system.  
+Let's say we want to use our `cowsay.sif` container to "analyze data" and save results in a different directory.  For this example, we first need to create a new directory with some data on our host system.  
 
 ```
 $ sudo mkdir /data
@@ -46,14 +46,14 @@ We also need a directory _within_ our container where we can bind mount the host
 Now let's see how bind mounts work.  First, let's list the contents of `/mnt` within the container without bind mounting `/data` to it.
 
 ```
-$ singularity exec lolcow.simg ls -l /mnt
+$ singularity exec lolcow.sif ls -l /mnt
 total 0
 ```
 
 The `/mnt` directory within the container is empty.  Now let's repeat the same command but using the `--bind` option to bind mount `/data` into the container.
 
 ```
-$ singularity exec --bind /data:/mnt lolcow.simg ls -l /mnt
+$ singularity exec --bind /data:/mnt lolcow.sif ls -l /mnt
 total 4
 -rw-rw-r-- 1 ubuntu ubuntu 17 Jun  7 20:57 vader.txt
 ```
@@ -63,7 +63,7 @@ Now the `/mnt` directory in the container is bind mounted to the `/data` directo
 Now what about our earlier example in which we used a runscript to run a our container as though it were an executable?  The `singularity run` command  accepts the `--bind` option and can execute our runscript like so.
 
 ```
-$ singularity run --bind /data:/mnt lolcow.simg -i /mnt/vader.txt -o /mnt/output3
+$ singularity run --bind /data:/mnt lolcow.sif -i /mnt/vader.txt -o /mnt/output3
 
 $ cat /data/output3
  __________________
