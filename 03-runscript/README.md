@@ -125,7 +125,7 @@ $ cat output2
 
 Now you can ship your image to lemaitre3
 ```
-$ scp ./lolcow.sif lemaitre3
+$ scp ./lolcow.sif lemaitre3:~
 ```
 This might not work from the virtual machine (it does not know your keys).
 you can copy it to your local host file system via
